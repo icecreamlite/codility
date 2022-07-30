@@ -3,15 +3,14 @@ def solution(S):
     if len(S) % 2:
         return 0
 
-    opening = "({["
-    closing = ")}]"
+    pair = {")": "(", "}": "{", "]": "["} # closing bracket as key
 
     stack = [] # stack for all opening brackets found
     for ind, ch in enumerate(S): 
-        if opening.find(ch) == -1: # if not opening
+        if ch in pair: # if closing bracket
             try:
-                if stack.pop() != opening[closing.find(ch)]:
-                    # closing bracket does not correspond to last opening bracket
+                if stack.pop() != pair[ch]:
+                    # last opening bracket does not correspond to closing bracket
                     return 0
             except:
                 # if stack is empty and found closing bracket
